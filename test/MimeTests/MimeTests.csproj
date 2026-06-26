@@ -26,36 +26,36 @@
   
   <!-- Windows -->
   <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/win-x64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/win-x64/native/*" />
   </ItemGroup>
   <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/win-arm64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/win-arm64/native/*" />
   </ItemGroup>
   <ItemGroup Condition=" '$(IsX64)' == 'false' AND '$(IsARM64)' == 'false' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/win-x86/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/win-x86/native/*" />
   </ItemGroup>
 
   <!-- Linux -->
   <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsLinux)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/linux-x64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/linux-x64/native/*" />
   </ItemGroup>
   <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsLinux)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/linux-arm64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/linux-arm64/native/*" />
   </ItemGroup>
 
   <!-- OSX arm64 -->
   <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsOSX)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/osx-arm64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/osx-arm64/native/*" />
   </ItemGroup>
   
   <!-- OSX x64 -->
   <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsOSX)' == 'true' ">
-    <NativeLib Include="../../src/Mime/runtimes/osx-x64/native/*" />
+    <NativeLib Include="../../src/Magic/runtimes/osx-x64/native/*" />
   </ItemGroup>
 
   <Target Name="CopyNativeLib" AfterTargets="Build">
     <Copy SourceFiles="@(NativeLib)" DestinationFolder="$(OutputPath)" />
-    <Copy SourceFiles="../../src/Mime/content/magic.mgc" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="../../src/Magic/content/magic.mgc" DestinationFolder="$(OutputPath)" />
   </Target>
 
   <ItemGroup>

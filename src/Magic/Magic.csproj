@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<Description>.NET wrapper for libmagic.</Description>
+		<AssemblyTitle>Magic</AssemblyTitle>
+		<Version Condition="'$(Version)' == ''">3.8.0</Version>
+		<Authors>red</Authors>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageId>Magic.NetStandard</PackageId>
+		<PackageTags>mime;mimetype;libmagic</PackageTags>
+		<PackageProjectUrl>https://github.com/hey-red/Mime</PackageProjectUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>Magic</AssemblyName>
+		<RootNamespace>HeyRed.Magic</RootNamespace>
+		<NoWarn>CS1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\..\key.snk')">
+		<AssemblyOriginatorKeyFile>..\..\..\key.snk</AssemblyOriginatorKeyFile>
+		<SignAssembly Condition=" '$(Configuration)' != 'Debug' ">true</SignAssembly>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="runtimes/**/*" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="content\magic.mgc">
+			<PackagePath>contentfiles</PackagePath>
+			<Pack>true</Pack>
+		</Content>
+	</ItemGroup>
+</Project>

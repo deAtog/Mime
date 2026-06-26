@@ -2,6 +2,8 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
+using HeyRed.Magic;
+
 namespace HeyRed.Mime;
 
 /// <summary>

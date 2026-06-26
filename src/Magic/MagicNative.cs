@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace HeyRed.Mime;
+namespace HeyRed.Magic;
 
-internal static class MagicNative
+public static class MagicNative
 {
     private const string MAGIC_LIB_PATH = "libmagic-1";
 

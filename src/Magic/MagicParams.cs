@@ -1,4 +1,4 @@
-﻿namespace HeyRed.Mime;
+﻿namespace HeyRed.Magic;
 
 /// <summary>
 /// The various limits.

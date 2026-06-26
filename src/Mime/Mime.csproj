@@ -1,63 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Description>.NET wrapper for libmagic.</Description>
+		<AssemblyTitle>Mime</AssemblyTitle>
+		<Version Condition="'$(Version)' == ''">3.8.0</Version>
+		<Authors>red</Authors>
+		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>Mime</AssemblyName>
+		<RootNamespace>HeyRed.Mime</RootNamespace>
+		<Configurations>Debug;Release</Configurations>
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+	</PropertyGroup>
+	<PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\..\key.snk')">
+		<AssemblyOriginatorKeyFile>..\..\..\key.snk</AssemblyOriginatorKeyFile>
+		<SignAssembly Condition=" '$(Configuration)' != 'Debug' ">true</SignAssembly>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <Description>.NET wrapper for libmagic.</Description>
-    <AssemblyTitle>Mime</AssemblyTitle>
-    <Version>3.8.0</Version>
-    <Authors>red</Authors>
-    <TargetFrameworks>netstandard2.0;net472;net48</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <PackageId>Mime</PackageId>
-    <PackageTags>mime;mimetype;libmagic</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/hey-red/Mime</PackageProjectUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>Mime</AssemblyName>
-    <RootNamespace>HeyRed.Mime</RootNamespace>
-    <AssemblyOriginatorKeyFile>../../../key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly Condition=" '$(Configuration)' != 'Debug' ">true</SignAssembly>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+		<PackageReference Include="MimeTypesMap" Version="1.0.9" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="MimeTypesMap" Version="1.0.9" />
-  </ItemGroup>
-    
-  <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="runtimes\win-x64\native\*" PackagePath="runtimes/win-x64/native/" Pack="true" />
-    <None Include="runtimes\win-x86\native\*" PackagePath="runtimes/win-x86/native/" Pack="true" />
-    <None Include="runtimes\win-arm64\native\*" PackagePath="runtimes/win-arm64/native/" Pack="true" />
-    <None Include="runtimes\linux-x64\native\*" PackagePath="runtimes/linux-x64/native/" Pack="true" />
-    <None Include="runtimes\linux-arm64\native\*" PackagePath="runtimes/linux-arm64/native/" Pack="true" />
-    <None Include="runtimes\linux-musl-x64\native\*" PackagePath="runtimes/linux-musl-x64/native/" Pack="true" />
-    <None Include="runtimes\osx-x64\native\*" PackagePath="runtimes/osx-x64/native/" Pack="true" />
-    <None Include="runtimes\osx-arm64\native\*" PackagePath="runtimes/osx-arm64/native/" Pack="true" />
-    
-    <None Include="content\*" PackagePath="runtimes/win-x64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/win-x86/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/win-arm64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/linux-x64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/linux-arm64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/linux-musl-x64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/osx-x64/native/" Pack="true" />
-    <None Include="content\*" PackagePath="runtimes/osx-arm64/native/" Pack="true" />
-      
-    <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />
-    
-    <None Include="Mime.targets" PackagePath="build" Pack="true" />
-    <None Include="Platform.props" PackagePath="build" Pack="true" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\**" />
+		<EmbeddedResource Remove="Properties\**" />
+		<None Remove="Properties\**" />
 
+		<None Include="Mime.targets" PackagePath="build" Pack="true" />
+		<None Include="Platform.props" PackagePath="build" Pack="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Magic\Magic.csproj" />
+	</ItemGroup>
 </Project>

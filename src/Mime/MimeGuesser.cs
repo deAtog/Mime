@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using HeyRed.Magic;
+
 namespace HeyRed.Mime;
 
 /// <summary>
