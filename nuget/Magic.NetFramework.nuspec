@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>Magic.NetFramework</id>
+		<version>$version$</version>
+		<authors>red</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/hey-red/Mime</projectUrl>
+		<description>.NET wrapper for libmagic.</description>
+		<tags>libmagic</tags>
+		<dependencies>
+			<group targetFramework="net40" />
+		</dependencies>
+		<contentFiles>
+			<files include="*.*" buildAction="Content" copyToOutput="true" />
+		</contentFiles>
+	</metadata>
+	<files>
+		<file src="Magic.NetFramework.props" target="build" />
+		<file src="Magic.NetFramework.targets" target="build" />
+		<file src="Magic.NetFramework.props" target="buildTransitive" />
+		<file src="Magic.NetFramework.targets" target="buildTransitive" />
+
+		<file src="Magic.NetFramework.app.config.*.transform" target="transform" />
+		
+		<file src="$SlowCheetahPath$\tools\*.*" target="tools" />
+		<file src="..\src\Magic\content\magic.mgc" target="contentfiles" />
+
+		<file src="..\src\Magic\bin\Release\netstandard2.0\Magic.dll" target="libmagic\x86" />
+		<file src="..\src\Magic\runtimes\win-x86\native\*.*" target="libmagic\x86" />
+
+		<file src="..\src\Magic\bin\Release\netstandard2.0\Magic.dll" target="libmagic\x64" />
+		<file src="..\src\Magic\runtimes\win-x64\native\*.*" target="libmagic\x64" />
+
+		<file src="..\src\Magic\bin\Release\netstandard2.0\Magic.dll" target="libmagic\arm64" />
+		<file src="..\src\Magic\runtimes\win-arm64\native\*.*" target="libmagic\arm64" />
+	</files>
+</package>

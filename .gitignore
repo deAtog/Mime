@@ -304,3 +304,6 @@ $RECYCLE.BIN/
 
 # Key
 key.snk
+
+# nuget tools
+nuget/tools

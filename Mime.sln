@@ -17,6 +17,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mime", "src\Mime\Mime.cspro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MimeTests", "test\MimeTests\MimeTests.csproj", "{EFF34B03-3E19-442E-947B-826976EF3552}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magic", "src\Magic\Magic.csproj", "{AB465A10-7258-5445-3129-C0F393D2AF73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{306FA457-CFA1-43ED-ADCB-28559B7E6031}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		nuget\Magic.NetFramework.app.config.arm64.transform = nuget\Magic.NetFramework.app.config.arm64.transform
+		nuget\Magic.NetFramework.app.config.x64.transform = nuget\Magic.NetFramework.app.config.x64.transform
+		nuget\Magic.NetFramework.app.config.x86.transform = nuget\Magic.NetFramework.app.config.x86.transform
+		nuget\Magic.NetFramework.nuspec = nuget\Magic.NetFramework.nuspec
+		nuget\Magic.NetFramework.props = nuget\Magic.NetFramework.props
+		nuget\Magic.NetFramework.targets = nuget\Magic.NetFramework.targets
+		nuget\Magic.NetStandard.nuspec = nuget\Magic.NetStandard.nuspec
+		nuget\Mime.nuspec = nuget\Mime.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

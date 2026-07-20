@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+	<metadata>
+		<id>Mime</id>
+		<version>$version$</version>
+		<authors>red</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<readme>README.md</readme>
+		<projectUrl>https://github.com/hey-red/Mime</projectUrl>
+		<description>.NET wrapper for libmagic.</description>
+		<tags>mime;mimetype</tags>
+		<dependencies>
+			<group targetFramework="net462">
+				<dependency id="Magic.NetFramework" version="$version$" />
+				<dependency id="MimeTypesMap" version="1.0.9" exclude="Build,Analyzers" />
+			</group>
+			<group targetFramework="netstandard2.0">
+				<dependency id="Magic.NetStandard" version="$version$" />
+				<dependency id="MimeTypesMap" version="1.0.9" exclude="Build,Analyzers" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\README.md" target="\" />
+		<file src="..\src\Mime\bin\Release\**\Mime.dll" target="lib" />
+		<file src="..\src\Mime\bin\Release\**\Mime.xml" target="lib" />
+	</files>
+</package>
