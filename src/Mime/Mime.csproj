@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<Description>.NET wrapper for libmagic.</Description>
 		<AssemblyTitle>Mime</AssemblyTitle>
-		<Version Condition="'$(Version)' == ''">3.8.0</Version>
+		<Version Condition="'$(Version)' == ''">3.8.1</Version>
 		<Authors>red</Authors>
 		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>

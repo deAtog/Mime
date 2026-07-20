@@ -4,7 +4,7 @@
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<Description>.NET wrapper for libmagic.</Description>
 		<AssemblyTitle>Magic</AssemblyTitle>
-		<Version Condition="'$(Version)' == ''">3.8.0</Version>
+		<Version Condition="'$(Version)' == ''">3.8.1</Version>
 		<Authors>red</Authors>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
