@@ -20,42 +20,18 @@
     <ProjectReference Include="..\..\src\Mime\Mime.csproj" />
   </ItemGroup>
 
-  <ImportGroup>
-    <Import Project="..\..\src\Mime\Platform.props" />
-  </ImportGroup>
-  
-  <!-- Windows -->
-  <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/win-x64/native/*" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/win-arm64/native/*" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(IsX64)' == 'false' AND '$(IsARM64)' == 'false' AND '$(IsWindows)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/win-x86/native/*" />
-  </ItemGroup>
-
-  <!-- Linux -->
-  <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsLinux)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/linux-x64/native/*" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsLinux)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/linux-arm64/native/*" />
-  </ItemGroup>
-
-  <!-- OSX arm64 -->
-  <ItemGroup Condition=" '$(IsARM64)' == 'true' AND '$(IsOSX)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/osx-arm64/native/*" />
-  </ItemGroup>
-  
-  <!-- OSX x64 -->
-  <ItemGroup Condition=" '$(IsX64)' == 'true' AND '$(IsOSX)' == 'true' ">
-    <NativeLib Include="../../src/Magic/runtimes/osx-x64/native/*" />
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == ''">
+    <Arch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</Arch>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(Windows))' ">win-$(Arch.ToLower())</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(Linux))' ">linux-$(Arch.ToLower())</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(OSX))' ">osx-$(Arch.ToLower())</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)/../../src/Magic/runtimes/$(RuntimeIdentifier)') ">
+    <NativeLib Include="$(MSBuildProjectDirectory)/../../src/Magic/runtimes/$(RuntimeIdentifier)/native/*" />
   </ItemGroup>
 
   <Target Name="CopyNativeLib" AfterTargets="Build">
     <Copy SourceFiles="@(NativeLib)" DestinationFolder="$(OutputPath)" />
-    <Copy SourceFiles="../../src/Magic/content/magic.mgc" DestinationFolder="$(OutputPath)" />
   </Target>
 
   <ItemGroup>
@@ -64,12 +40,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="../../src/Magic/content/magic.mgc" Link="magic.mgc" />
+  </ItemGroup>
+
   <Target Name="PrintRID" BeforeTargets="Build">
-    <Message Text="IsWindows $(IsWindows)" Importance="high" />
-    <Message Text="IsOSX $(IsOSX)" Importance="high" />
-    <Message Text="IsLinux $(IsLinux)" Importance="high" />
-    <Message Text="IsArm64 $(IsARM64)" Importance="high" />
-    <Message Text="IsX64 $(IsX64)" Importance="high" />
+    <Message Text="Current runtime: $(RuntimeIdentifier)" Importance="high" />
   </Target>
 
 </Project>
