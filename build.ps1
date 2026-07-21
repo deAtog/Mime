@@ -99,6 +99,7 @@ function Nupkg
 
 function Build
 {
+	. dotnet clean -c Release $Solution -p Version=$AssemblyVersion
 	. dotnet build -c Release $Solution -p Version=$AssemblyVersion
 }
 
