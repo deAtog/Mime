@@ -50,9 +50,27 @@ function Debug
 	Write-Host
 }
 
+function WriteVersionToTransforms
+{
+	$transforms = Get-ChildItem -Path $NugetDir -File -Filter "*.transform" -Name
+
+	foreach ($transform in $transforms)
+	{
+		$Filename = Join-Path $NugetDir $transform
+		$Regex = 'codeBase version="(.*?)"'
+
+		$TransformData = Get-Content -Encoding UTF8 $Filename
+		$NewString = $TransformData -replace $Regex, "codeBase version=""$AssemblyVersion.0"""
+
+		$Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding $false
+		[System.IO.File]::WriteAllLines($Filename, $NewString, $Utf8NoBomEncoding)
+	}
+}
+
 function Nupkg
 {
 	InstallToolPackages
+	WriteVersionToTransforms
 
 	$repo_type = 'git'
 
