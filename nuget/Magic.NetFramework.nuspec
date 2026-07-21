@@ -15,6 +15,7 @@
 		<contentFiles>
 			<files include="*.*" buildAction="Content" copyToOutput="true" />
 		</contentFiles>
+		<repository type="$repo_type$" url="$repo_url$" branch="$repo_branch$" commit="$repo_commit$" />
 	</metadata>
 	<files>
 		<file src="Magic.NetFramework.props" target="build" />

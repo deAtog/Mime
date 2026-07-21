@@ -1,6 +1,8 @@
 param(
 	[Parameter(Position = 0)]
-	[string] $Version = "3.8.1"
+	[string] $Version = "3.8.1-alpha-1",
+	[Parameter(Position = 1)]
+	[string] $AssemblyVersion = "3.8.1"
 )
 
 $WorkingDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
@@ -29,7 +31,6 @@ function InstallToolPackages
 	Debug "Installing tools..."
 	$OutDir = New-Item -ItemType Directory -Path $ToolDir -Force
 
-
 	if (-not (Test-Path "$SlowCheetahPath"))
 	{
 		# Install SlowCheetah version 2.5.48 which only requires .Net 4.0 to run
@@ -53,14 +54,34 @@ function Nupkg
 {
 	InstallToolPackages
 
-	. $nuget pack $(Join-Path $NugetDir 'Magic.NetFramework.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir -Properties "SlowCheetahPath=$SlowCheetahPath"
-	. $nuget pack $(Join-Path $NugetDir 'Magic.NetStandard.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir
-	. $nuget pack $(Join-Path $NugetDir 'Mime.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir
+	$repo_type = 'git'
+
+	if (-not $env:CI)
+	{
+		$branch = git branch --show-current
+		$remote = git config --get branch.$branch.remote
+		$remote = if ($remote) { $remote } else { "origin" }
+
+		$repo_url = git config --get remote.$remote.url
+		$repo_branch = git symbolic-ref HEAD
+		$repo_commit = git rev-parse HEAD
+	}
+	else
+	{
+		$repo_url = "${$env:GITHUB_SERVER_URL}/${$env:GITHUB_REPOSITORY_ID}.git"
+		$repo_branch = $env:GITHUB_REF
+		$repo_commit = $env:GITHUB_SHA
+	}
+
+	. $nuget pack $(Join-Path $NugetDir 'Magic.NetFramework.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir -Properties "SlowCheetahPath=$SlowCheetahPath;repo_type=$repo_type;repo_url=$repo_url;repo_branch=$repo_branch;repo_commit=$repo_commit"
+	. $nuget pack $(Join-Path $NugetDir 'Magic.NetStandard.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir -Properties "repo_type=$repo_type;repo_url=$repo_url;repo_branch=$repo_branch;repo_commit=$repo_commit"
+
+	. $nuget pack $(Join-Path $NugetDir 'Mime.nuspec') -NoPackageAnalysis -Version $Version -OutputDirectory $NugetDir -Properties "repo_type=$repo_type;repo_url=$repo_url;repo_branch=$repo_branch;repo_commit=$repo_commit"
 }
 
 function Build
 {
-	. dotnet build -c Release $Solution -p Version=$Version
+	. dotnet build -c Release $Solution -p Version=$AssemblyVersion
 }
 
 Build

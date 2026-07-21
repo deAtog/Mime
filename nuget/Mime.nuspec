@@ -20,6 +20,7 @@
 				<dependency id="MimeTypesMap" version="1.0.9" exclude="Build,Analyzers" />
 			</group>
 		</dependencies>
+		<repository type="$repo_type$" url="$repo_url$" branch="$repo_branch$" commit="$repo_commit$" />
 	</metadata>
 	<files>
 		<file src="..\README.md" target="\" />
