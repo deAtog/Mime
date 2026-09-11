@@ -1,6 +1,6 @@
 param(
 	[Parameter(Position = 0)]
-	[string] $Version = "3.8.1-alpha-1",
+	[string] $Version = "3.8.1-alpha-2",
 	[Parameter(Position = 1)]
 	[string] $AssemblyVersion = "3.8.1"
 )
