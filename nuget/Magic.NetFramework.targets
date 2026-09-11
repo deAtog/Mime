@@ -56,10 +56,10 @@
 		/>
 
 		<TransformXml
-			Source="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)')"
-			Transform="$(MSBuildThisFileDirectory)..\transform\Magic.NetFramework.app.config.arm64.transform"
-			Destination="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)'"
-			Condition="('$(Platform)' == 'AnyCPU') OR ('$(Platform)' == 'ARM64')"
+		  Source="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)')"
+		  Transform="$(MSBuildThisFileDirectory)..\transform\Magic.NetFramework.app.config.arm64.transform"
+		  Destination="@(AppConfigWithTargetPath->'$(OutDir)%(TargetPath)')"
+		  Condition="('$(Platform)' == 'AnyCPU') OR ('$(Platform)' == 'ARM64')"
 		/>
 	</Target>
 	
